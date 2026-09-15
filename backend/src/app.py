@@ -26,3 +26,7 @@ def create_movie(movie: MovieCreate):
     movie_id = max(movies_list.keys(), default=0) + 1
     movies_list[movie_id] = movie
     return movie
+
+@router.delete("/movie/{id}")
+def delete_movie(id: int):
+    del movies_list[id]
