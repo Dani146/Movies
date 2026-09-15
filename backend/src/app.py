@@ -9,4 +9,14 @@ movies_list = {}
 def get_movie_list():
     return movies_list
 
+@router.get("/movie/{id}")
+def get_movie(id: int):
+    return movies_list[id]
+
 # add a post tomorrow
+
+@router.post("/movies_list")
+def create_movie(movie: MovieCreate):
+    movie_id = max(movies_list.keys(), default=0) + 1
+    movies_list[movie_id] = movie
+    return movie
