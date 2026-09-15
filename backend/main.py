@@ -11,4 +11,4 @@ app.include_router(actor_router)
 
 @app.get("/")
 async def root():
-    return {"message": "Sigma"}
+    return {"message": "Welcome to main screen"}
