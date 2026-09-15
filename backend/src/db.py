@@ -8,7 +8,11 @@ from sqlalchemy.orm import DeclarativeBase, relationship
 
 DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
-class Post(DeclarativeBase):
-    __table__name = "movies"
+class Base(DeclarativeBase):
+    pass
+
+
+class Movie(Base):
+    __tablename__ = "movies"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
