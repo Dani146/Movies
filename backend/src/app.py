@@ -29,4 +29,9 @@ def create_movie(movie: MovieCreate):
 
 @router.delete("/movie/{id}")
 def delete_movie(id: int):
+    if id not in movies_list:
+        raise HTTPException(
+            status_code=404,
+            detail="Movie was not found to delete"
+        )
     del movies_list[id]
