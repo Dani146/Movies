@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-
+from src.schemas.actor import ActorCreate
 router = APIRouter()
 
 actors_list = {}
