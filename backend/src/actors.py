@@ -8,3 +8,4 @@ actors_list = {}
 @router.get("actors")
 def get_actor():
     return actors_list
+
