@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from src.schemas.movie import MovieCreate
 
 router = APIRouter()
@@ -11,6 +11,12 @@ def get_movie_list():
 
 @router.get("/movie/{id}")
 def get_movie(id: int):
+    if id not in movies_list:
+        raise HTTPException(
+            status_code=404,
+            detail="Movie was not found"
+        )
+
     return movies_list[id]
 
 # add a post tomorrow
