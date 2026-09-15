@@ -5,7 +5,7 @@ router = APIRouter()
 actors_list = {}
 
 
-@router.get("actors_list")
+@router.get("/actors_list")
 def get_actor():
     return actors_list
 
@@ -19,3 +19,9 @@ def get_actor_id(id: int):
         )
 
     return actors_list[id]
+
+@router.post("/actors_list")
+def add_actor(actor: ActorCreate):
+    actor_id = max(actors_list.keys(), default=0) + 1
+    actors_list[actor_id] = actor
+    return actor
