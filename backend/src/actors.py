@@ -20,6 +20,8 @@ def get_actor_id(id: int):
 
     return actors_list[id]
 
+
+
 @router.post("/actors_list")
 def add_actor(actor: ActorCreate):
     actor_id = max(actors_list.keys(), default=0) + 1
