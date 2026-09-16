@@ -5,4 +5,4 @@ class MovieCreate(BaseModel):
     year: int
     score: float
     description: str
-    
+    genre: list[Genre]
