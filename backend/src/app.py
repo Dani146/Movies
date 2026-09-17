@@ -29,8 +29,6 @@ def get_movie(id: int):
 async def create_movie(movie: MovieCreate,
                        session: AsyncSession = Depends(get_async_session)):
 
-    print("POST endpoint reached")
-
     new_movie = Movie(
         title = movie.title,
         year = movie.year,
@@ -38,9 +36,9 @@ async def create_movie(movie: MovieCreate,
         description = movie.description
     )
     session.add(new_movie)
-    print("Movie added to session")
+
     await session.commit()
-    print("Committed")
+
     await session.refresh(new_movie)
 
     return new_movie
