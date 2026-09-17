@@ -10,8 +10,6 @@ from sqlalchemy import select
 
 router = APIRouter()
 
-movies_list = {}
-
 @router.get("/movies_list")
 async def get_movie_list(session: AsyncSession = Depends(get_async_session)):
 
