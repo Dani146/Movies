@@ -20,14 +20,18 @@ async def get_movie_list(session: AsyncSession = Depends(get_async_session)):
     return movies
 
 @router.get("/movie/{id}")
-def get_movie(id: int):
-    if id not in movies_list:
+async def get_movie(id: UUID,
+                    session: AsyncSession = Depends(get_async_session)):
+
+    movie_id = await session.get(Movie, id)
+
+    if movie_id is None:
         raise HTTPException(
             status_code=404,
-            detail="Movie was not found"
+            detail="movie was not found"
         )
 
-    return movies_list[id]
+    return movie_id
 
 # add a post tomorrow
 
