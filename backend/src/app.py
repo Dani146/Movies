@@ -3,7 +3,7 @@ from src.schemas.movie import MovieCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 from src.db import get_async_session
-
+from uuid import UUID
 from src.db import Movie, get_async_session
 router = APIRouter()
 
@@ -46,10 +46,20 @@ async def create_movie(movie: MovieCreate,
    
 
 @router.delete("/movie/{id}")
-def delete_movie(id: int):
-    if id not in movies_list:
+async def delete_movie(id: UUID,
+                 session: AsyncSession = Depends(get_async_session)):
+
+    movie = await session.get(Movie, id)
+
+    if movie is None:
         raise HTTPException(
             status_code=404,
-            detail="Movie was not found to delete"
+            detail="Movie was not found"
         )
-    del movies_list[id]
+
+    
+    await session.delete(movie)
+    await session.commit()
+
+    return {"message": "movie was deleted sucessfully"}
+
