@@ -5,13 +5,19 @@ from fastapi import Depends
 from src.db import get_async_session
 from uuid import UUID
 from src.db import Movie, get_async_session
+from sqlalchemy import select
+
+
 router = APIRouter()
 
 movies_list = {}
 
 @router.get("/movies_list")
-def get_movie_list():
-    return movies_list
+async def get_movie_list(session: AsyncSession = Depends(get_async_session)):
+
+    result = await session.execute(select(Movie))
+    movies = result.scalars().all()
+    return movies
 
 @router.get("/movie/{id}")
 def get_movie(id: int):
