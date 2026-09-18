@@ -30,6 +30,12 @@ class Actor(Base):
     surname = Column(String, nullable=False)
     birth_date = Column(Date, nullable=False)
 
+class Movie_Actor(Base):
+    __tablename__ = "movie_actor"
+
+    movie_id = Column(Uuid(as_uuid=True), ForeignKey("movies.id"), primary_key=True)
+    actor_id = Column(Uuid(as_uuid=True), ForeignKey("actors.id"), primary_key=True)
+
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
