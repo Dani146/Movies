@@ -21,6 +21,7 @@ class Movie(Base):
     year = Column(Integer, nullable=False)
     score = Column(Float, nullable=True)
     description = Column(String, nullable=False)
+    genre = Column(String, nullable=False)
 
 class Actor(Base):
     __tablename__ = "actors"

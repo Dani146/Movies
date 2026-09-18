@@ -10,7 +10,7 @@ from sqlalchemy import select
 router = APIRouter()
 
 #  retrieves all Movie objects from the database
-@router.get("/movies_list")
+@router.get("/movies")
 async def get_movie_list(session: AsyncSession = Depends(get_async_session)):
 
     result = await session.execute(select(Movie))
@@ -31,7 +31,7 @@ async def get_movie(id: UUID,
 
     return movie
 # creates a movie entity and sends it to database and saves
-@router.post("/movies_list")
+@router.post("/movies")
 async def create_movie(movie: MovieCreate,
                        session: AsyncSession = Depends(get_async_session)):
 
@@ -39,7 +39,8 @@ async def create_movie(movie: MovieCreate,
         title = movie.title,
         year = movie.year,
         score = movie.score,
-        description = movie.description
+        description = movie.description,
+        genre = movie.genres
     )
     session.add(new_movie)
 

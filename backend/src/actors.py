@@ -8,7 +8,7 @@ from sqlalchemy import select
 
 router = APIRouter()
 
-@router.get("/actors_list")
+@router.get("/actors")
 async def get_actor(session: AsyncSession = Depends(get_async_session)):
     result = await session.execute(select(Actor))
     actors = result.scalars().all()
@@ -29,7 +29,7 @@ async def get_actor_id(id: UUID,
 
     return actor
 
-@router.post("/actors_list")
+@router.post("/actors")
 async def add_actor(actor: ActorCreate,
               session: AsyncSession = Depends(get_async_session)):
 
