@@ -19,15 +19,19 @@ async def get_actor(session: AsyncSession = Depends(get_async_session)):
     
 
 @router.get("/actor/{id}")
-def get_actor_id(id: int):
+async def get_actor_id(id: UUID,
+                 session: AsyncSession = Depends(get_async_session)):
 
-    if id not in actors_list:
+    actor = await session.get(Actor, id)
+
+    if actor is None:
         raise HTTPException(
             status_code=404,
-            detail="actor was not found"
-        )
+            detail="Actor was not found"
+        ) 
 
-    return actors_list[id]
+    return actor
+
 
 
 
