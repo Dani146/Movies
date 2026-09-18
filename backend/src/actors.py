@@ -12,8 +12,11 @@ actors_list = {}
 
 
 @router.get("/actors_list")
-def get_actor():
-    return actors_list
+async def get_actor(session: AsyncSession = Depends(get_async_session)):
+    result = await session.execute(select(Actor))
+    actors = result.scalars().all()
+    return actors
+    
 
 @router.get("/actor/{id}")
 def get_actor_id(id: int):
