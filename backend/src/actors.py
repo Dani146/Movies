@@ -44,4 +44,5 @@ async def add_actor(actor: ActorCreate,
 
     await session.refresh(new_actor)
 
+    print("works")
     return new_actor
