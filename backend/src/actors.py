@@ -32,9 +32,6 @@ async def get_actor_id(id: UUID,
 
     return actor
 
-
-
-
 @router.post("/actors_list")
 async def add_actor(actor: ActorCreate,
               session: AsyncSession = Depends(get_async_session)):
@@ -53,3 +50,19 @@ async def add_actor(actor: ActorCreate,
 
     print("works")
     return new_actor
+
+
+@router.delete("/actor/{id}")
+async def delete_actor(id: UUID,
+                       session: AsyncSession = Depends(get_async_session)):
+    actor = await session.get(Actor, id)
+
+    if actor is None:
+        raise HTTPException(
+            status_code=404,
+            detail="actor does not exist"
+        )
+    
+    await session.delete(actor)
+    await session.commit()
+    return {"message": "actor was deleted sucessfully"}
