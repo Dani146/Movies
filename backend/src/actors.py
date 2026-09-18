@@ -8,9 +8,6 @@ from sqlalchemy import select
 
 router = APIRouter()
 
-actors_list = {}
-
-
 @router.get("/actors_list")
 async def get_actor(session: AsyncSession = Depends(get_async_session)):
     result = await session.execute(select(Actor))
