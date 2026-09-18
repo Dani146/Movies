@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from src.schemas.movie import ActorCreate
+from src.schemas.actor import ActorCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 from uuid import UUID
