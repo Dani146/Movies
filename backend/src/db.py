@@ -1,7 +1,7 @@
 from collections.abc import AsyncGenerator
 import uuid
 from sqlalchemy import Integer, Float
-from sqlalchemy import Column, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, relationship
@@ -21,6 +21,14 @@ class Movie(Base):
     year = Column(Integer, nullable=False)
     score = Column(Float, nullable=True)
     description = Column(String, nullable=False)
+
+class Actor(Base):
+    __tablename__ = "actors"
+
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    name = Column(String, nullable=False)
+    surname = Column(String, nullable=False)
+    birth_date = Column(Date, nullable=False)
 
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
