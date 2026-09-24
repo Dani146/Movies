@@ -22,7 +22,7 @@ class Movie(Base):
     score = Column(Float, nullable=True)
     description = Column(String, nullable=False)
 
-    actors = relationship("Actor", secondary="movie_actor", back_populates="movie")
+    actors = relationship("Actor", secondary="movie_actor", back_populates="movies")
 
 class Actor(Base):
     __tablename__ = "actors"
@@ -31,6 +31,8 @@ class Actor(Base):
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
     birth_date = Column(Date, nullable=False)
+
+    movies = relationship("Movie", secondary="movie_actor", back_populates="actors")
 
 class Movie_Actor(Base):
     __tablename__ = "movie_actor"
