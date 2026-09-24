@@ -22,6 +22,8 @@ class Movie(Base):
     score = Column(Float, nullable=True)
     description = Column(String, nullable=False)
 
+    actors = relationship("Actor", secondary="movie_actor", back_populates="movie")
+
 class Actor(Base):
     __tablename__ = "actors"
 
