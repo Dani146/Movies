@@ -40,7 +40,6 @@ async def create_movie(movie: MovieCreate,
         year = movie.year,
         score = movie.score,
         description = movie.description,
-        genre = movie.genres
     )
     session.add(new_movie)
 
