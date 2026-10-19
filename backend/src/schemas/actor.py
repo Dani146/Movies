@@ -5,3 +5,4 @@ class ActorCreate(BaseModel):
     name : str
     surname : str
     birthdate : date
+    biography: str
