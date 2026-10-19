@@ -1,9 +1,11 @@
 from pydantic import BaseModel
-from src.schemas.genre import Genre
+from datetime import date
 
 class MovieCreate(BaseModel):
     title: str
-    year: int
-    score: float
+    user_rating: float
+    critic_rating: float
+    duration_min: int
     description: str
-    genres: list[Genre]
+    release_date: date
+    country_of_production: str
