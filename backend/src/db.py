@@ -20,32 +20,15 @@ class UserAccount(Base):
     username = Column(String, nullable=False, unique=True)
     hashed_paasword = Column(String, nullable=False)
 
-class Movie(Base):
-    __tablename__ = "movies"
+class Director(Base):
+    __tablename__ = "director"
 
-    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    title = Column(String, nullable=False)
-    year = Column(Integer, nullable=False)
-    score = Column(Float, nullable=True)
-    description = Column(String, nullable=False)
+    director_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
 
-    actors = relationship("Actor", secondary="movie_actor", back_populates="movies")
-
-class Actor(Base):
-    __tablename__ = "actors"
-
-    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String, nullable=False)
-    surname = Column(String, nullable=False)
-    birth_date = Column(Date, nullable=False)
-
-    movies = relationship("Movie", secondary="movie_actor", back_populates="actors")
-
-class Movie_Actor(Base):
-    __tablename__ = "movie_actor"
-
-    movie_id = Column(Uuid(as_uuid=True), ForeignKey("movies.id"), primary_key=True)
-    actor_id = Column(Uuid(as_uuid=True), ForeignKey("actors.id"), primary_key=True)
+    director_name = Column(String, nullable=False)
+    director_surname = Column(String, nullable=False)
+    director_birthdate = Column(Date)
+    director_biography = Column(Text)
 
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
