@@ -40,6 +40,13 @@ class Actor(Base):
     actor_birthdate = Column(Date)
     actor_biography = Column(Text)
 
+class Genre(Base):
+    __tablename__ = "genres"
+
+    genre_id = Column(Integer, primary_key=True, autoincrement=True)
+
+    genre = Column(String, nullable=False, unique=True)
+
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
