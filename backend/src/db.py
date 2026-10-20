@@ -12,6 +12,13 @@ DATABASE_URL = "sqlite+aiosqlite:///C:/Users/danie/Movies/backend/test.db"
 class Base(DeclarativeBase):
     pass
 
+class UserAccount(Base):
+    __tablename__ = "users_account"
+
+    user_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    username = Column(String, nullable=False, unique=True)
+    hashed_paasword = Column(String, nullable=False)
 
 class Movie(Base):
     __tablename__ = "movies"
