@@ -30,6 +30,16 @@ class Director(Base):
     director_birthdate = Column(Date)
     director_biography = Column(Text)
 
+class Actor(Base):
+    __tablename__ = "actor"
+
+    actor_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    actor_name = Column(String, nullable=False)
+    actor_surname = Column(String, nullable=False)
+    actor_birthdate = Column(Date)
+    actor_biography = Column(Text)
+
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
