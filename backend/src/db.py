@@ -47,6 +47,19 @@ class Genre(Base):
 
     genre = Column(String, nullable=False, unique=True)
 
+class Movie(Base):
+    __tablename__ = "movie"
+
+    movie_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    movie_title = Column(String, nullable=False)
+    movie_user_rating = Column(Float, nullable=True)
+    movie_critic_rating = Column(Float, nullable=True)
+    movie_duration_min = Column(Integer, nullable=True)
+    movie_description = Column(Text, nullable=True)
+    movie_release_date = Column(Date, nullable=True)
+    movie_country_origin = Column(String, nullable=True)
+
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
