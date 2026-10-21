@@ -1,11 +1,9 @@
 from collections.abc import AsyncGenerator
 import uuid
 from sqlalchemy import Integer, Float
-from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Date
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, String, Text, ForeignKey, Date
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, relationship
-import datetime
 from sqlalchemy import Uuid
 DATABASE_URL = "sqlite+aiosqlite:///C:/Users/danie/Movies/backend/test.db"
 
@@ -18,7 +16,7 @@ class UserAccount(Base):
     user_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
 
     username = Column(String, nullable=False, unique=True)
-    hashed_paasword = Column(String, nullable=False)
+    hashed_password = Column(String, nullable=False)
 
 class Director(Base):
     __tablename__ = "director"
@@ -109,14 +107,14 @@ class MovieGenre(Base):
     __tablename__ = "movie_genre"
 
     movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
-    genre_id = Column(Uuid(as_uuid=True), ForeignKey("genre.genre_id"), primary_key=True)
+    genre_id = Column(Integer, ForeignKey("genre.genre_id"), primary_key=True)
 
 
 class SeriesGenre(Base):
     __tablename__ = "series_genre"
 
     series_id = Column(Uuid(as_uuid=True), ForeignKey("series.series_id"), primary_key=True)
-    genre_id = Column(Uuid(as_uuid=True), ForeignKey("genre.genre_id"), primary_key=True)
+    genre_id = Column(Integer, ForeignKey("genre.genre_id"), primary_key=True)
 
 class SeriesDirector(Base):
     __tablename__ = "director_series"
