@@ -44,6 +44,7 @@ class Actor(Base):
     actor_biography = Column(Text)
 
     movies = relationship("Movie",secondary="movie_actor",back_populates="actors")
+    series_actor = relationship("Series", secondary="series_actor", back_populates="actor_series")
 
 class Genre(Base):
     __tablename__ = "genre"
@@ -88,6 +89,7 @@ class Series(Base):
 
     genre_series = relationship("Genre", secondary="series_genre", back_populates="series_genre")
     director_series = relationship("Director", secondary="director_series", back_populates="series_director")
+    actor_series = relationship("Actor", secondary="series_actor", back_populates="series_actor")
 
 
 class MovieActor(Base):
@@ -121,6 +123,12 @@ class SeriesDirector(Base):
 
     series_id = Column(Uuid(as_uuid=True), ForeignKey("series.series_id"), primary_key=True)
     director_id = Column(Uuid(as_uuid=True), ForeignKey("director.director_id"), primary_key=True)
+
+class SeriesActor(Base):
+    __tablename__ = "series_actor"
+
+    series_id = Column(Uuid(as_uuid=True), ForeignKey("series.series_id"), primary_key=True)
+    actor_id = Column(Uuid(as_uuid=True), ForeignKey("actor.actor_id"), primary_key=True)
 
 
 
