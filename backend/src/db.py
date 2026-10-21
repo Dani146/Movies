@@ -60,6 +60,20 @@ class Movie(Base):
     movie_release_date = Column(Date, nullable=True)
     movie_country_origin = Column(String, nullable=True)
 
+class Series(Base):
+    __tablename__ = "series"
+
+    series_id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    series_title = Column(String, nullable=False)
+    series_user_rating = Column(Float, nullable=True)
+    series_critic_rating = Column(Float, nullable=True)
+    avg_episode_duration = Column(Integer, nullable=True)
+    series_description = Column(Text, nullable=True)
+    series_release_date = Column(Date, nullable=True)
+    series_country_origin = Column(String, nullable=True)
+
+
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
