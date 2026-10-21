@@ -52,6 +52,7 @@ class Genre(Base):
     genre = Column(String, nullable=False, unique=True)
 
     movies_genre = relationship("Movie", secondary="movie_genre", back_populates="genre")
+    series_genre = relationship("Series", secondary="series_genre", back_populates="genre_series")
 
 class Movie(Base):
     __tablename__ = "movie"
@@ -84,6 +85,9 @@ class Series(Base):
     series_country_origin = Column(String, nullable=True)
 
 
+    genre_series = relationship("Genre", secondary="series_genre", back_populates="series_genre")
+
+
 class MovieActor(Base):
     __tablename__ = "movie_actor"
 
@@ -101,6 +105,13 @@ class MovieGenre(Base):
     __tablename__ = "movie_genre"
 
     movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
+    genre_id = Column(Uuid(as_uuid=True), ForeignKey("genre.genre_id"), primary_key=True)
+
+
+class SeriesGenre(Base):
+    __tablename__ = "series_genre"
+
+    series_id = Column(Uuid(as_uuid=True), ForeignKey("series.series_id"), primary_key=True)
     genre_id = Column(Uuid(as_uuid=True), ForeignKey("genre.genre_id"), primary_key=True)
 
 
