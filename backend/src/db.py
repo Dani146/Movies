@@ -45,11 +45,13 @@ class Actor(Base):
     movies = relationship("Movie",secondary="movie_actor",back_populates="actors")
 
 class Genre(Base):
-    __tablename__ = "genres"
+    __tablename__ = "genre"
 
     genre_id = Column(Integer, primary_key=True, autoincrement=True)
 
     genre = Column(String, nullable=False, unique=True)
+
+    movies_genre = relationship("Movie", secondary="movie_genre", back_populates="genre")
 
 class Movie(Base):
     __tablename__ = "movie"
@@ -66,6 +68,7 @@ class Movie(Base):
 
     actors = relationship("Actor", secondary="movie_actor", back_populates="movies")
     directors = relationship("Director", secondary="director_movie", back_populates="movies_director")
+    genre = relationship("Genre", secondary="movie_genre", back_populates="movies_genre")
 
 class Series(Base):
     __tablename__ = "series"
@@ -92,6 +95,13 @@ class DirectorMovie(Base):
 
     movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
     director_id = Column(Uuid(as_uuid=True), ForeignKey("director.director_id"), primary_key=True)
+
+
+class MovieGenre(Base):
+    __tablename__ = "movie_genre"
+
+    movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
+    genre_id = Column(Uuid(as_uuid=True), ForeignKey("genre.genre_id"), primary_key=True)
 
 
 engine = create_async_engine(DATABASE_URL)
