@@ -40,6 +40,8 @@ class Actor(Base):
     actor_birthdate = Column(Date)
     actor_biography = Column(Text)
 
+    movies = relationship("Movie",secondary="movie_actor",back_populates="actors")
+
 class Genre(Base):
     __tablename__ = "genres"
 
@@ -59,6 +61,8 @@ class Movie(Base):
     movie_description = Column(Text, nullable=True)
     movie_release_date = Column(Date, nullable=True)
     movie_country_origin = Column(String, nullable=True)
+
+    actors = relationship("Actor", secondary="movie_actor", back_populates="movies")
 
 class Series(Base):
     __tablename__ = "series"
