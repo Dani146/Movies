@@ -30,6 +30,8 @@ class Director(Base):
     director_birthdate = Column(Date)
     director_biography = Column(Text)
 
+    movies_director = relationship("Movie", secondary="director_movie", back_populates="directors")
+
 class Actor(Base):
     __tablename__ = "actor"
 
@@ -63,6 +65,7 @@ class Movie(Base):
     movie_country_origin = Column(String, nullable=True)
 
     actors = relationship("Actor", secondary="movie_actor", back_populates="movies")
+    directors = relationship("Director", secondary="director_movie", back_populates="movies_director")
 
 class Series(Base):
     __tablename__ = "series"
@@ -83,6 +86,12 @@ class MovieActor(Base):
 
     movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
     actor_id = Column(Uuid(as_uuid=True), ForeignKey("actor.actor_id"), primary_key=True)
+
+class DirectorMovie(Base):
+    __tablename__ = "director_movie"
+
+    movie_id = Column(Uuid(as_uuid=True), ForeignKey("movie.movie_id"), primary_key=True)
+    director_id = Column(Uuid(as_uuid=True), ForeignKey("director.director_id"), primary_key=True)
 
 
 engine = create_async_engine(DATABASE_URL)
