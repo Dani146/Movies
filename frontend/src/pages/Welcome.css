@@ -1,0 +1,52 @@
+.welcome {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #101014, #252538);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 24px;
+}
+
+.welcome h1 {
+  font-size: 64px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.welcome p {
+  font-size: 20px;
+  color: #b8b8c5;
+  margin-bottom: 35px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.buttons button {
+  background-color: #e50914;
+  color: white;
+
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.buttons button:hover {
+  background-color: #b20710;
+  transform: translateY(-3px);
+}
