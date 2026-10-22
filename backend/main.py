@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.db import Movie, create_db_and_tables, get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -12,6 +12,18 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.get("/")
+@app.get("/welcome")
 async def root():
-    return {"message": "Welcome to main screen"}
+    return {"message": "Welcome to What to Watch!"}
+
+@app.get("/main")
+async def root():
+    return {"message" : "Welcome to main screen"}
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
