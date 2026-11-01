@@ -1,6 +1,12 @@
 import "./Welcome.css";
-
+import { useNavigate } from "react-router-dom";
 function Welcome() {
+   const navigate = useNavigate();
+
+   
+   function handleClick() {
+        navigate("/main");
+    }
 
    return (
     <div className="welcome">
@@ -10,10 +16,15 @@ function Welcome() {
       <div className="buttons">
         <button>Login</button>
         <button>Register</button>
-        <button>Continue as Guest</button>
+          <button onClick={handleClick}>
+            Continue as Guest
+        </button>
       </div>
     </div>
   );
+
 }
+
+    
 
 export default Welcome;
