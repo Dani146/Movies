@@ -18,7 +18,8 @@ function Welcome() {
         <button>Register</button>
           <button onClick={handleClick}>
             Continue as Guest
-        </button>   
+        </button>
+        <button onClick={test}>Test Backend</button>
       </div>
     </div>
   );
@@ -26,7 +27,7 @@ function Welcome() {
 }
 
 async function test() {
-  const response = await fetch("http://127.0.0.1:8000/welcome");
+  const response = await fetch("http://127.0.0.1:8000/movies/");
 
 
   const data = await response.json();

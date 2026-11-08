@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.db import Movie, create_db_and_tables, get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from src.routers import movies
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -11,6 +13,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(movies.router)
 
 @app.get("/welcome")
 async def root():
