@@ -18,13 +18,21 @@ function Welcome() {
         <button>Register</button>
           <button onClick={handleClick}>
             Continue as Guest
-        </button>
+        </button>   
       </div>
     </div>
   );
 
 }
 
+async function test() {
+  const response = await fetch("http://127.0.0.1:8000/welcome");
+
+
+  const data = await response.json();
+
+  console.log(data);
+}
     
 
 export default Welcome;

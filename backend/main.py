@@ -20,6 +20,10 @@ async def root():
 async def root():
     return {"message" : "Welcome to main screen"}
 
+@app.get("/test")
+async def root():
+    return {"message" : "Test completed sucessfully"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
