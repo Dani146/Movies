@@ -18,13 +18,13 @@ class GenreCreate(BaseModel):
     genre: str
 
 class MovieCreate(BaseModel):
-    title: str
-    user_rating: float | None = None
-    critic_rating: float | None = None
-    duration_min: int | None = None
-    description: str | None = None
-    release_date: date | None = None
-    country_of_production: str | None = None
+    movie_title: str
+    movie_user_rating: float | None = None
+    movie_critic_rating: float | None = None
+    movie_duration_min: int | None = None
+    movie_description: str | None = None
+    movie_release_date: date | None = None
+    movie_country_origin: str | None = None
 
 class SeriesCreate(BaseModel):
     title: str

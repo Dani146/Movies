@@ -21,3 +21,5 @@ async def add_movie(
     new_movie = Movie(**movie.model_dump())
     db.add(new_movie)
     await db.commit()
+
+    return {"message": "Movie added successfully"}
